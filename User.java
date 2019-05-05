@@ -8,14 +8,16 @@ package tienda;
  */
 
 public class User {
-    private int noDeCuenta, noDeCompra;
+    private int noDeCuenta, noDeCompra, compraParaDescuento;
     private String nombre;
     private boolean terceraEdad;
+    
 
-    public User(String nombre, int noDeCuenta, int noDeCompra, boolean terceraEdad) {
+    public User(String nombre, int noDeCuenta, boolean terceraEdad) {
         this.nombre = nombre;        
         this.noDeCuenta = noDeCuenta;
-        this.noDeCompra = noDeCompra;
+        this.noDeCompra = 0;
+        this.compraParaDescuento = 0;
         this.terceraEdad = terceraEdad;    
     }
 
@@ -35,16 +37,21 @@ public class User {
         return terceraEdad;
     }
 
-    public void setNoDeCompra(int noDeCompra) {
-        this.noDeCompra = noDeCompra;
+    public int getCompraParaDescuento() {
+        return compraParaDescuento;
     }
     
-    public void addCompra() {
+    public void addCompra(float total) {
         this.noDeCompra = noDeCompra++;
+        if (total >= Store.COMPRA_MINIMA){
+            compraParaDescuento ++;
+        }
     }
 
     @Override
     public String toString() {
-        return "User{" + "Nombre=" + nombre + ", noDeCuenta=" + noDeCuenta + ", noDeCompra=" + noDeCompra + ", terceraEdad=" + terceraEdad + '}';
-    }            
+        return "User{" + "noDeCuenta=" + noDeCuenta + ", nombre=" + nombre + ", noDeCompra=" + noDeCompra + ", compraParaDescuento=" + compraParaDescuento + ", terceraEdad=" + terceraEdad + '}';
+    }
+
+             
 }
