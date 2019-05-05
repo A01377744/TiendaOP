@@ -10,13 +10,16 @@ import java.util.ArrayList;
  */
 
 public class Store {
-    private String nombre;
+    public String nombre;
     protected ArrayList<User> usuarios = new ArrayList<>();
     public Inventario[] inventarios;  
     public int TAMAÑO_INVENTARIO = 8;
     private int inventariosDisponibles = 0;
-    
-    public Store(String nombre){
+    public static final float DESCUENTO_TERCERA_EDAD = 0.2f;
+    public static final float DESCUENTO_REGULAR = 0.1f;
+    public static final float COMPRA_MINIMA = 200;
+        
+    public Store(String nombre){       
         this.nombre = nombre;
         inventarios = new Inventario[TAMAÑO_INVENTARIO];
 
@@ -26,8 +29,8 @@ public class Store {
         return nombre;
     }
     
-    public void registrarUsuario(String nombre, int noDeCuenta, int noDeCompra, boolean terceraEdad){
-        usuarios.add(new User(nombre, noDeCuenta, noDeCompra, terceraEdad));
+    public void registrarUsuario(String nombre, int noDeCompra, boolean terceraEdad){
+        usuarios.add(new User(nombre, noDeCompra, terceraEdad));
     }
     
     public void registrarInventario(String nombre){
@@ -37,6 +40,6 @@ public class Store {
         }else{
             System.out.println("Se ha alcanzado el máximo de inventarios.");
         }
-
 }
+    
 }

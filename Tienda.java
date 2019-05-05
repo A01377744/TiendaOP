@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class Tienda {
     Scanner s;
 
-
     public void iniciarTienda(){
         
     }
@@ -21,9 +20,9 @@ public class Tienda {
         System.out.println("Iniciando… ");
         System.out.println("");       
         
-        tienda.registrarUsuario("Juan Perez", 1, 1, false);
-        tienda.registrarUsuario("Dominic Santiago", 2, 1, false);
-        tienda.registrarUsuario("Marcus Fenix", 3, 1, true);             
+        tienda.registrarUsuario("Juan Perez", 1, false);
+        tienda.registrarUsuario("Dominic Santiago", 2, false);
+        tienda.registrarUsuario("Marcus Fenix", 3, true);             
 
         tienda.registrarInventario("Frutas");
         tienda.registrarInventario("Verduras");
@@ -34,11 +33,11 @@ public class Tienda {
         tienda.registrarInventario("Ropa");
         tienda.registrarInventario("Papelería");
         
-        Edible f001 = new Edible(101, "manzana", 23, true, "2019-04-28");
-        Edible f002 = new Edible(102, "piña", 57, true, "2019-04-28");
+        Edible f001 = new Edible(101, "manzana", 23, true, "2019-05-28");
+        Edible f002 = new Edible(102, "piña", 57.5f, true, "2020-04-28");
         
         tienda.inventarios[1].agregarArticulos(f001, 3);
-        tienda.inventarios[1].agregarArticulos(f002, 0);
+        tienda.inventarios[1].agregarArticulos(f002, 7);
         
         for(Inventario i :tienda.inventarios){
             i.eliminar();
@@ -54,6 +53,9 @@ public class Tienda {
         
         Scanner s = new Scanner(System.in);   
         System.out.println("");
+        
+        System.out.println(tienda.inventarios[1].articulos);
+        System.out.println(tienda.inventarios[1].numeroArticulos);
 
         int opcion = s.nextInt();
         if (opcion !=4){
@@ -62,9 +64,7 @@ public class Tienda {
                     System.out.println("1. Ver usuarios");
                     System.out.println("2. Registrar nuevo usuario");
                     System.out.println("");
-                    
-                    int seleccion = s.nextInt();
-                    
+                                        
                     break;
                 case 2:
                     System.out.println("1. Ver inventario");
@@ -84,7 +84,14 @@ public class Tienda {
                         System.out.println(i + ". " + u.getNombre());
                         i++;                      
                     }
-                            System.out.println(tienda.inventarios[1].venderArticulos(f002, 10));
+                            Factura factura1 = new Factura(tienda.usuarios.get(1));
+
+                            tienda.inventarios[1].venderArticulos(f002, 7, factura1);
+                            tienda.inventarios[1].venderArticulos(f002, 10, factura1); 
+                            
+                                    
+                            System.out.println(factura1.imprimirFactura());
+
                     break;
                 default:
                     System.out.println("Seleccione una opción válida");
@@ -92,17 +99,10 @@ public class Tienda {
                     break;
             }
         }             
-        
-        System.out.println("¡Adiós! ");
-       
-        
-        
-        System.out.println(tienda.inventarios[1].articulos);
-        System.out.println(tienda.inventarios[1].numeroArticulos);
-        
-        
-        System.out.println(f002.expirar());
-      
+                
+        System.out.println("");
+        System.out.println("¡Adiós! ");     
+             
     }
     
 }

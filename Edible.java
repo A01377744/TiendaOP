@@ -13,7 +13,6 @@ import java.util.Date;
  */
 
 public class Edible extends Article{
-    private static final String MENSAJE_EXPIRACION = "El producto ya expiró, no es posible venderlo.";
     private Date today = Calendar.getInstance().getTime();
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -42,15 +41,15 @@ public class Edible extends Article{
         Date expiracion = checarCaducidad();
         if (expiracion.after(today)) {
             int diasParaExpirar = (int)((expiracion.getTime() - today.getTime()) / 86400000);
-            return "El producto expirará en " + diasParaExpirar + " días.";
+            return "El producto: " + nombre + " expirará en " + diasParaExpirar + " días.";
         }
         if (expiracion.before(today)) {
             disponible = false;
-            return MENSAJE_EXPIRACION;
+            return "El producto " + nombre + " ya expiró, no es posible venderlo.";
         }
         if (expiracion.equals(today)) {
             disponible = false;
-            return MENSAJE_EXPIRACION;
+            return "El producto " + nombre + " ya expiró, no es posible venderlo.";
         }
         else{ return null;}
      
